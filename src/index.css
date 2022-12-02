@@ -94,3 +94,12 @@ button:focus-visible {
 	display: flex;
 	justify-content: space-between;
 }
+
+.justify-left {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+.align-self-end {
+	margin-top: auto;
+}

@@ -1,7 +1,7 @@
 .auction-card-container {
 	display: flex;
 	justify-content: space-between;
-	padding: 10%;
+	padding: 7% 10%;
 	.auction-image-container {
 		width: 50%;
 		// display: none;
@@ -11,7 +11,8 @@
 	}
 	.auction-info {
 		width: 50%;
-		display: block;
+		display: flex;
+		flex-direction: column;
 		color: #564c2e;
 		margin-left: 15%;
 		h1 {
@@ -31,6 +32,7 @@
 		}
 		.auction-bid-buttons {
 			padding: 1.5rem;
+			width: 80%;
 			.auction-bid-button {
 				width: 45%;
 				border-radius: 0px;
@@ -53,6 +55,10 @@
 				align-items: center;
 				display: flex;
 			}
+		}
+		.ant-divider {
+			height: 2.5rem;
+			margin: 0 20px;
 		}
 		p {
 			margin: 0;

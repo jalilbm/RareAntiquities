@@ -1,6 +1,6 @@
 import "./index.scss";
 import picassoFaceArt from "../../assets/picasso-face-art.jpeg";
-import { ConfigProvider, Button, Input, Space } from "antd";
+import { ConfigProvider, Button, Input, Space, Divider } from "antd";
 
 function AuctionCard() {
 	return (
@@ -22,29 +22,53 @@ function AuctionCard() {
 					<h1>Art Name (1997)</h1>
 					<p className="bold-p">Farewell My Concubine / Cat on Rock</p>
 					<br />
-					<div className="center-div">
-						<Input prefix="$" suffix="USD" className="bid-amount" />
-					</div>
-					<div className="auction-bid-buttons space-between">
-						<Button className="auction-bid-button">Bid using card</Button>
-						<Button className="auction-bid-button">Bid using usdt</Button>
+					<div className="justify-left">
+						<div>
+							<p className="bold-p">Total bids amount</p>
+							<p>
+								<span>$</span>120,000
+							</p>
+						</div>
+						<Divider type="vertical" />
+						<div>
+							<p className="bold-p">All bidders</p>
+							<p>1,235</p>
+						</div>
+						<Divider type="vertical" />
+						<div>
+							<p className="bold-p">Bids range</p>
+							<p>
+								<span>$</span>2 <span>-</span> <span>$</span>2,500
+							</p>
+						</div>
 					</div>
 					<br />
-					<Input.Group compact className="subscribe-to-art-span">
+					<div className="align-self-end">
 						<div className="center-div">
-							<Input
-								style={{ width: "calc(100% - 100px)" }}
-								placeholder="Email"
-								className="subscribe-to-art-input"
-							/>
-							<Button type="primary" className="subscribe-to-art-btn">
-								Subscribe
-							</Button>
+							<Input prefix="$" suffix="USD" className="bid-amount" />
 						</div>
 						<div className="center-div">
-							<p>Subscribe to get latest news about this art</p>
+							<div className="auction-bid-buttons space-between">
+								<Button className="auction-bid-button">Bid using card</Button>
+								<Button className="auction-bid-button">Bid using usdt</Button>
+							</div>
 						</div>
-					</Input.Group>
+						<Input.Group compact className="subscribe-to-art-span">
+							<div className="center-div">
+								<Input
+									style={{ width: "calc(100% - 100px)" }}
+									placeholder="Email"
+									className="subscribe-to-art-input"
+								/>
+								<Button type="primary" className="subscribe-to-art-btn">
+									Subscribe
+								</Button>
+							</div>
+							<div className="center-div">
+								<p>Subscribe to get latest news about this art</p>
+							</div>
+						</Input.Group>
+					</div>
 				</div>
 			</div>
 		</ConfigProvider>
