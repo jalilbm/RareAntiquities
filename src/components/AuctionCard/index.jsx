@@ -29,6 +29,22 @@ function AuctionCard() {
 						<Button className="auction-bid-button">Bid using card</Button>
 						<Button className="auction-bid-button">Bid using usdt</Button>
 					</div>
+					<br />
+					<Input.Group compact className="subscribe-to-art-span">
+						<div className="center-div">
+							<Input
+								style={{ width: "calc(100% - 100px)" }}
+								placeholder="Email"
+								className="subscribe-to-art-input"
+							/>
+							<Button type="primary" className="subscribe-to-art-btn">
+								Subscribe
+							</Button>
+						</div>
+						<div className="center-div">
+							<p>Subscribe to get latest news about this art</p>
+						</div>
+					</Input.Group>
 				</div>
 			</div>
 		</ConfigProvider>

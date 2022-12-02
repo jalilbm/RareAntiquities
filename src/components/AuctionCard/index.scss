@@ -36,7 +36,27 @@
 				border-radius: 0px;
 			}
 		}
+		.subscribe-to-art-span {
+			height: 2.5rem;
+			border-radius: 0px;
+			.subscribe-to-art-input {
+				height: 2.5rem;
+				border-radius: 0px;
+			}
+			.subscribe-to-art-btn {
+				height: 2.5rem;
+				border-radius: 0px;
+			}
+			.center-div {
+				width: 100%;
+				justify-content: center;
+				align-items: center;
+				display: flex;
+			}
+		}
 		p {
+			margin: 0;
+			padding: 0;
 		}
 	}
 }
