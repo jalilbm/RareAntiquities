@@ -79,3 +79,14 @@ button:focus-visible {
 	background: red;
 	border-color: red;
 }
+
+.center-div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.space-between {
+	display: flex;
+	justify-content: space-between;
+}

@@ -22,10 +22,13 @@ function AuctionCard() {
 					<h1>Art Name (1997)</h1>
 					<p className="bold-p">Farewell My Concubine / Cat on Rock</p>
 					<br />
-					<Space direction="vertical">
+					<div className="center-div">
 						<Input prefix="$" suffix="USD" className="bid-amount" />
+					</div>
+					<div className="auction-bid-buttons space-between">
 						<Button className="auction-bid-button">Bid using card</Button>
-					</Space>
+						<Button className="auction-bid-button">Bid using usdt</Button>
+					</div>
 				</div>
 			</div>
 		</ConfigProvider>

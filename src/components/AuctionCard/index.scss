@@ -20,11 +20,21 @@
 			font-weight: 600;
 			font-size: 2.5rem;
 		}
+
 		.bid-amount {
 			height: 2.5rem;
+			width: 80%;
+			border-radius: 0px;
 		}
 		.auction-bid-button {
 			height: 2.5rem;
+		}
+		.auction-bid-buttons {
+			padding: 1.5rem;
+			.auction-bid-button {
+				width: 45%;
+				border-radius: 0px;
+			}
 		}
 		p {
 		}
