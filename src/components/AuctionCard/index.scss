@@ -66,3 +66,35 @@
 		}
 	}
 }
+
+@media only screen and (max-width: 600px) {
+	.auction-card-container {
+		display: flex;
+		flex-direction: column;
+		.auction-image-container {
+			margin-top: 10%;
+			width: 100%;
+		}
+		.auction-info {
+			margin-left: 0;
+			margin-top: 10%;
+			width: 100%;
+		}
+		.auction-info {
+			.bid-amount {
+				height: 2.5rem;
+				width: 100%;
+				border-radius: 0px;
+			}
+
+			.auction-bid-buttons {
+				padding: 1.5rem 0;
+				width: 100%;
+				.auction-bid-button {
+					width: 45%;
+					border-radius: 0px;
+				}
+			}
+		}
+	}
+}
