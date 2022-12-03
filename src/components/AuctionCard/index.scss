@@ -4,7 +4,6 @@
 	padding: 7% 10%;
 	.auction-image-container {
 		width: 50%;
-		// display: none;
 		.auction-image {
 			max-width: 100%;
 		}
@@ -15,6 +14,7 @@
 		flex-direction: column;
 		color: #564c2e;
 		margin-left: 15%;
+		padding: 3% 0;
 		h1 {
 			font-family: "Bembo";
 			font-style: normal;
@@ -67,7 +67,7 @@
 	}
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
 	.auction-card-container {
 		display: flex;
 		flex-direction: column;
