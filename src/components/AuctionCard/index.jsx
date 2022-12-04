@@ -77,27 +77,25 @@ function AuctionCard() {
 					<img className="auction-image" src={picassoFaceArt} />
 				</div>
 				<div className="auction-info">
-					<p className="bold-p">
-						FROM A PRIVATE HONG KONG COLLECTION (LOTS 1001-1002)
-					</p>
-					<h1>Art Name (1997)</h1>
-					<p className="bold-p">Farewell My Concubine / Cat on Rock</p>
+					<p className="bold-p">FROM THE RARE ANTIQUITIES (LOTS 0001)</p>
+					<h1>Like An Animal (1957)</h1>
+					<p className="bold-p">Pablo Picasso</p>
 					<br />
 					<div className="justify-left">
 						<div>
-							<p className="bold-p">Total bids amount</p>
+							<p className="bold-p">Total bid amount</p>
 							<p>
 								<span>$</span>120,000
 							</p>
 						</div>
 						<Divider type="vertical" />
 						<div>
-							<p className="bold-p">All bidders</p>
+							<p className="bold-p">Number of bidders</p>
 							<p>1,235</p>
 						</div>
 						<Divider type="vertical" />
 						<div>
-							<p className="bold-p">Bids range</p>
+							<p className="bold-p">Bid range</p>
 							<p>
 								<span>$</span>2 <span>-</span> <span>$</span>2,500
 							</p>
@@ -110,8 +108,8 @@ function AuctionCard() {
 						</div>
 						<div className="center-div">
 							<div className="auction-bid-buttons space-between">
-								<Button className="auction-bid-button">Bid using card</Button>
-								<Button className="auction-bid-button">Bid using usdt</Button>
+								<Button className="auction-bid-button">Bid by card</Button>
+								<Button className="auction-bid-button">Bid by USDT</Button>
 							</div>
 						</div>
 						<Input.Group compact className="subscribe-to-art-span">

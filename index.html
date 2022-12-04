@@ -11,5 +11,13 @@
 	<body>
 		<div id="root"></div>
 		<script type="module" src="/src/main.jsx"></script>
+		<!-- your index.html -->
+		<script>
+			/**
+			 * this is a hack for dragula
+			 * error: global is not defined
+			 */
+			var global = global || window;
+		</script>
 	</body>
 </html>
