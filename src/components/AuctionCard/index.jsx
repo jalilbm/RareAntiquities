@@ -1,8 +1,9 @@
 import "./index.scss";
 import picassoFaceArt from "../../assets/picasso-face-art.jpeg";
-import { ConfigProvider, Button, Input, Space, Divider, message } from "antd";
-import { useState, useEffect } from "react";
+import { ConfigProvider, Button, Input, Divider, message } from "antd";
+import { useState } from "react";
 import axios from "axios";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 function AuctionCard() {
 	const [subscriberEmail, setSubscriberEmail] = useState("");
