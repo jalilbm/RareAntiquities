@@ -10,7 +10,7 @@ import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
-import Buffer from "buffer";
+import { Buffer } from "buffer";
 
 const BscChain = {
 	id: 56,
