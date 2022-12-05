@@ -61,6 +61,7 @@ function AuctionCard() {
 	async function isReadyToBid() {
 		if (provider && signer) {
 			setChainId(provider.network.chainId);
+			setReadyToBid(true);
 		} else {
 			setReadyToBid(false);
 		}
