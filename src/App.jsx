@@ -50,6 +50,8 @@ const wagmiClient = createClient({
 	provider,
 });
 
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
 function App() {
 	return (
 		<WagmiConfig client={wagmiClient}>

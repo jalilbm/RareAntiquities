@@ -79,7 +79,7 @@ function AuctionCard() {
 				</div>
 				<div className="auction-info">
 					<p className="bold-p">FROM THE RARE ANTIQUITIES (LOTS 0001)</p>
-					<h1>Like An Animal (195777)</h1>
+					<h1>Like An Animal (1957)</h1>
 					<p className="bold-p">Pablo Picasso</p>
 					<br />
 					<div className="justify-left">
