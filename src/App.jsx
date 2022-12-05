@@ -6,14 +6,14 @@ import {
 	getDefaultWallets,
 	darkTheme,
 } from "@rainbow-me/rainbowkit";
-import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
-import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { Buffer } from "buffer";
+import contract_data from "./components/Web3/data/contract/contract.json";
 
 const BscChain = {
-	id: 56,
+	id: contract_data.TARGET_CHAIN,
 	name: "Binance Smart Chain",
 	network: "Binance Smart Chain",
 	iconUrl: "https://bin.bnbstatic.com/static/images/common/favicon.ico",
