@@ -365,12 +365,17 @@ function AuctionCard(props) {
 								</div>
 								<div className="center-div">
 									<div className="auction-bid-buttons space-between">
-										<Button className="auction-bid-button">Bid by card</Button>
+										<Button className="auction-bid-button" disabled={true}>
+											Bid by card
+										</Button>
 										<Button
 											className="auction-bid-button"
 											onClick={bid}
 											disabled={
-												!stakingOptions || !stakingOptions[7] || pending
+												!stakingOptions ||
+												!stakingOptions[7] ||
+												pending ||
+												!walletAddress
 											}
 										>
 											Bid by USDT
