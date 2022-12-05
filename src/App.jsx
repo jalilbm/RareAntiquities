@@ -11,6 +11,8 @@ import { infuraProvider } from "wagmi/providers/infura";
 import { publicProvider } from "wagmi/providers/public";
 import { Buffer } from "buffer";
 import contract_data from "./components/Web3/data/contract/contract.json";
+import ArtistBanner from "./components/ArtistBanner";
+import CustomRouter from "./CustomRouter";
 
 const BscChain = {
 	id: contract_data.TARGET_CHAIN,
@@ -61,14 +63,15 @@ function App() {
 				theme={darkTheme({
 					accentColor: "#564c2e",
 					accentColorForeground: "white",
-					borderRadius: "small",
+					borderRadius: "large",
 					fontStack: "system",
 					overlayBlur: "small",
 				})}
 				modalSize="compact"
 			>
 				<div className="App">
-					<Auction />
+					<ArtistBanner />
+					<CustomRouter />
 				</div>
 			</RainbowKitProvider>
 		</WagmiConfig>

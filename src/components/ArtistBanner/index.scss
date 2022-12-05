@@ -1,6 +1,6 @@
 .artist-banner {
 	width: 100%;
-	height: 15vh;
+	height: 20vh;
 	max-height: 90px;
 	background-color: #ededeb;
 	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
@@ -11,58 +11,30 @@
 		// max-width: 85%;
 		height: 15vh;
 		display: flex;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: center;
-		position: absolute;
 		width: 100%;
+		max-width: 1154px !important;
 
 		.connect-wallet-btn-container {
 			justify-content: flex-end;
-			position: relative;
-			right: 5%;
 			height: 15vh;
 			max-height: 90px;
-			width: 25%;
+			padding: 0 10px;
 			align-items: center;
 			display: flex;
-			background: linear-gradient(
-				to left,
-				#ededeb 0%,
-				#ededeb 85%,
-				transparent 100%
-			);
 		}
 
 		.logo-container {
 			height: 15vh;
 			max-height: 90px;
-			width: 15%;
+			// width: 15%;
 			min-width: 70px;
-			position: relative;
-			right: -5%;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			background: linear-gradient(
-				to right,
-				#ededeb 0%,
-				#ededeb 85%,
-				transparent 100%
-			);
-			.artist-logo {
-				max-width: 100%;
-				object-fit: contain;
-			}
-		}
-		.artist-image-container {
-			width: 100%;
-			height: 100%;
-			max-height: 90px;
-			.artist-image {
-				width: 100%;
-				height: 100%;
-				max-height: 90px;
-				object-fit: cover;
+			.logo {
+				width: 70px;
 			}
 		}
 	}
@@ -77,12 +49,6 @@
 			.logo-container {
 				width: 30%;
 				max-height: 80px;
-			}
-			.artist-image-container {
-				display: none;
-			}
-			.artist-name {
-				display: none;
 			}
 			.connect-wallet-btn-container {
 				width: 30%;

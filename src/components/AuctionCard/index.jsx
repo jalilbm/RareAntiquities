@@ -1,5 +1,4 @@
 import "./index.scss";
-import picassoFaceArt from "../../assets/picasso-face-art.jpeg";
 import { ConfigProvider, Button, Input, Divider, message } from "antd";
 import { useState, useContext, useMemo, useEffect } from "react";
 import axios from "axios";
@@ -9,6 +8,7 @@ import { useProvider } from "wagmi";
 import { ethers } from "ethers";
 import token_data from "../Web3/data/usdt/token.json";
 import contract_data from "../Web3/data/contract/contract.json";
+import { publicProvider } from "wagmi/providers/public";
 import {
 	formatUsd,
 	formatUsdInput,
@@ -22,10 +22,10 @@ import {
 
 var regexp = /^\d+(\.\d{1,18})?$/;
 
-function AuctionCard() {
+function AuctionCard(props) {
 	const [subscriberEmail, setSubscriberEmail] = useState("");
 	const [messageApi, contextHolder] = message.useMessage();
-	const [stakingOptions, setStakingOptions] = useState();
+	const [stakingOptions, setStakingOptions] = useState(null);
 	const [finishedTokenInfoUpdate, setFinishedTokenInfoUpdate] = useState(true);
 	// const { provider, setProvider } = useContext(RainbowKitProvider);
 	const [chainId, setChainId] = useState();
@@ -39,11 +39,13 @@ function AuctionCard() {
 	const [usdBalance, setUsdBalance] = useState(0);
 	const [pending, setPending] = useState(false);
 	const [txHash, setTxHash] = useState(null);
-	const [signer, setSigner] = useState(null);
-	const stakingAddress = "0x14a94D62d24a2b9d29FCdeFfb643a2B209e44fA6";
+	const [contractBalance, setContractBalance] = useState(null);
+	const [readStaking, setReadStaking] = useState(null);
+	const stakingAddress = props.stakingAddress;
 	const provider = useProvider({
 		chainId: contract_data.TARGET_CHAIN,
 	});
+	const { data: signer } = useSigner();
 
 	const getAllowance = async (token_) => {
 		const allowance = await token_.allowance(walletAddress, stakingAddress);
@@ -51,11 +53,11 @@ function AuctionCard() {
 	};
 
 	const getStakingOptions = async (staking) => {
-		console.log("aaaaaaa");
-		const options = await staking.getOptions();
-		console.log("aaaaaaa 22222", options);
-		setStakingOptions(options);
-		setFinishedTokenInfoUpdate(true);
+		if (!stakingOptions) {
+			const options = await staking.getOptions();
+			setStakingOptions(options);
+			setFinishedTokenInfoUpdate(true);
+		}
 	};
 
 	async function isReadyToBid() {
@@ -71,33 +73,50 @@ function AuctionCard() {
 		const data = await staking.getUserData();
 		setStakingData(data);
 	};
-	const { data: signer_ } = useSigner();
+
+	const getReadStakingData = async (readStaking) => {
+		const options = await readStaking.getOptions();
+		setStakingOptions(options);
+		setFinishedTokenInfoUpdate(true);
+	};
+
 	useMemo(() => {
-		if (signer_ && provider && stakingAddress) {
-			setSigner(signer_);
-			const signer = signer_;
-			console.log("aaaa", signer);
+		if (stakingAddress) {
+			const provider_ = new ethers.providers.JsonRpcProvider(
+				"https://data-seed-prebsc-1-s1.binance.org:8545	"
+			);
+			const _staking = new ethers.Contract(
+				stakingAddress,
+				contract_data.abi,
+				provider_
+			);
+			getReadStakingData(_staking);
+		}
+		if (signer && provider && stakingAddress) {
+			if (!walletAddress) {
+				setWalletAddress(signer._address);
+			}
 			const token_ = new ethers.Contract(
 				token_data.token_address,
 				token_data.token_abi,
 				signer
 			);
-			console.log("bbbb", token_);
 			const staking = new ethers.Contract(
 				stakingAddress,
 				contract_data.abi,
 				signer
 			);
-			console.log("ccccc", staking, staking.getOptions());
+
 			setToken(token_);
 			setStaking(staking);
+
 			isReadyToBid();
 
 			getAllowance(token_);
 			getStakingOptions(staking);
 			getStakingData(staking);
 		}
-	}, [provider, walletAddress, stakingAddress]);
+	}, [provider, walletAddress, stakingAddress, signer]);
 
 	const getTokenBalance = async () => {
 		const data = await token.balanceOf(walletAddress);
@@ -121,18 +140,53 @@ function AuctionCard() {
 	useEffect(() => {
 		clearInterval(refreshStakingId);
 		refreshStakingId = setInterval(() => {
-			console.log("hhhhhhhh", staking);
 			if (!!staking) {
 				getStakingData(staking);
-				console.log("hhhhhhhh 111111");
 				getStakingOptions(staking);
-				console.log("hhhhhhhh 222222");
 			}
 			if (!!walletAddress) {
 				getTokenBalance();
 			}
 		}, 5000);
 	}, [staking]);
+
+	// useEffect(() => {
+	// 	axios
+	// 		.get(
+	// 			`https://${
+	// 				contract_data.TARGET_CHAIN === 97
+	// 					? "api-testnet.bscscan.com"
+	// 					: "api.bscscan.com"
+	// 			}/api?module=account&action=tokenbalance&contractaddress=${
+	// 				token_data.token_address
+	// 			}&address=${stakingAddress}&tag=latest&apikey=${
+	// 				import.meta.env.VITE_BSCSCAN_API_KEY
+	// 			}`
+	// 		)
+	// 		.then((response) => {
+	// 			response = response.data;
+	// 			console.log(response);
+	// 			if (response.status === "1")
+	// 				setContractBalance(
+	// 					Number(response.result) / 10 ** token_data.USDT_DECIMALS
+	// 				);
+	// 			else setContractBalance("Try again later");
+	// 		});
+	// }, []);
+
+	const updateContractBalance = async () => {
+		const cb = await readStaking.myBalance();
+		setContractBalance(Number(cb) / 10 ** token_data.USDT_DECIMALS);
+		// return Number(cb) / 10 ** token_data.USDT_DECIMALS;
+	};
+
+	useEffect(() => {
+		if (readStaking) {
+			updateContractBalance();
+
+			// setContractBalance(cb);
+		}
+	}, [readStaking]);
 
 	async function bid() {
 		isReadyToBid();
@@ -211,7 +265,7 @@ function AuctionCard() {
 		});
 		axios
 			.post(import.meta.env.VITE_BASE_URL + `/api/art/subscribe/`, {
-				artId: 1,
+				artId: props.subscribe_art_id,
 				email: subscriberEmail,
 			})
 			.then((response) => {
@@ -249,62 +303,83 @@ function AuctionCard() {
 			{contextHolder}
 			<div className="auction-card-container">
 				<div className="auction-image-container">
-					<img className="auction-image" src={picassoFaceArt} />
+					<img className="auction-image" src={props.image} />
 				</div>
 				<div className="auction-info">
-					<p className="bold-p">FROM THE RARE ANTIQUITIES (LOTS 0001)</p>
-					<h1>Like An Animal (1957)</h1>
-					<p className="bold-p">Pablo Picasso</p>
+					<p className="bold-p">{props.head}</p>
+					<h1>{props.title}</h1>
+					<p className="bold-p">{props.artist}</p>
 					<br />
-					<div className="justify-left">
-						<div>
-							<p className="bold-p">Total bid amount</p>
-							<p>
-								<span>$</span>120,000
-							</p>
-						</div>
-						<Divider type="vertical" />
-						<div>
-							<p className="bold-p">Number of bidders</p>
-							<p>1,235</p>
-						</div>
-						<Divider type="vertical" />
-						<div>
-							<p className="bold-p">Bid range</p>
-							<p>
-								<span>$</span>2 <span>-</span> <span>$</span>2,500
-							</p>
-						</div>
-					</div>
-					<br />
-					<div className="align-self-end">
-						<div className="center-div">
-							<Input
-								id="bid-amount"
-								prefix="$"
-								suffix="USD"
-								className="bid-amount"
-							/>
-						</div>
-						<div className="center-div">
-							<div className="auction-bid-buttons space-between">
-								<Button className="auction-bid-button">Bid by card</Button>
-								<Button
-									className="auction-bid-button"
-									onClick={bid}
-									// onClick={() => {
-									// 	console.log(
-									// 		!stakingOptions,
-									// 		!stakingOptions[7],
-									// 		pending
-									// 	);
-									// }}
-									disabled={!stakingOptions || !stakingOptions[7] || pending}
-								>
-									Bid by USDT
-								</Button>
+					{stakingAddress && (
+						<div className="justify-left">
+							<div>
+								<p className="bold-p">Total bid amount</p>
+								<span>$</span>
+								{(stakingOptions &&
+									Number(stakingOptions[9]) / 10 ** token_data.USDT_DECIMALS) ||
+									0}
+							</div>
+							<Divider type="vertical" />
+							<div>
+								<p className="bold-p">Number of bidders</p>
+								<p>{(stakingOptions && Number(stakingOptions[3])) || 0}</p>
+							</div>
+							<Divider type="vertical" />
+							<div>
+								<p className="bold-p">Bid range</p>
+								<p>
+									<span>$</span>
+									{(stakingOptions &&
+										Number(stakingOptions[11]) /
+											10 ** token_data.USDT_DECIMALS) ||
+										0}{" "}
+									<span>-</span> <span>$</span>
+									{(stakingOptions &&
+										Number(stakingOptions[10]) /
+											10 ** token_data.USDT_DECIMALS <
+											1000000000000 &&
+										Number(stakingOptions[10]) /
+											10 ** token_data.USDT_DECIMALS) ||
+										0}
+								</p>
 							</div>
 						</div>
+					)}
+					<br />
+					<div className="align-self-end">
+						{stakingAddress && (
+							<>
+								<div className="center-div">
+									<Input
+										id="bid-amount"
+										prefix="$"
+										suffix="USD"
+										className="bid-amount"
+										placeholder={
+											walletAddress &&
+											`Balance: ${
+												balance && balance / 10 ** token_data.USDT_DECIMALS
+											}USDT`
+										}
+									/>
+								</div>
+								<div className="center-div">
+									<div className="auction-bid-buttons space-between">
+										<Button className="auction-bid-button">Bid by card</Button>
+										<Button
+											className="auction-bid-button"
+											onClick={bid}
+											disabled={
+												!stakingOptions || !stakingOptions[7] || pending
+											}
+										>
+											Bid by USDT
+										</Button>
+									</div>
+								</div>
+							</>
+						)}
+
 						<Input.Group compact className="subscribe-to-art-span">
 							<div className="center-div">
 								<Input

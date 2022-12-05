@@ -1,6 +1,5 @@
 import "./index.scss";
-import PicassoSignature from "../../assets/artists/PicassoSignature.png";
-import peopleOnMuseum from "../../assets/artists/people-on-museum.jpeg";
+import logo from "../../assets/logos/logo.png";
 import { ConnectWallet } from "../Web3/ConnectWallet";
 
 export default function ArtistBanner() {
@@ -8,11 +7,13 @@ export default function ArtistBanner() {
 		<div className="artist-banner">
 			<div className="artist-data">
 				<div className="logo-container">
-					<img className="artist-logo" src={PicassoSignature} />
+					<a href="https://therareantiquities.com/home-new/">
+						<img className="logo" src={logo} />
+					</a>
 				</div>
-				<div className="artist-image-container">
+				{/* <div className="artist-image-container">
 					<img className="artist-image" src={peopleOnMuseum} />
-				</div>
+				</div> */}
 
 				<div className="connect-wallet-btn-container">
 					<ConnectWallet />

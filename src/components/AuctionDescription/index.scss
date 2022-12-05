@@ -1,0 +1,27 @@
+.auction-description-container {
+	width: 100%;
+	padding-top: 10%;
+	.auction-description {
+		.video-container {
+			.video-player {
+				// width: 50%;
+				height: 90vh;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.auction-description-container {
+		width: 100%;
+		padding-top: 10%;
+		.auction-description {
+			.video-container {
+				.video-player {
+					width: 80%;
+					height: 100%;
+				}
+			}
+		}
+	}
+}
