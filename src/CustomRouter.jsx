@@ -52,7 +52,7 @@ export default function CustomRouter(props) {
 							artist="Pablo Picasso"
 							subscribe_art_id={3}
 							description=""
-							art_video="https://rarefnd-bucket.s3.us-east-2.amazonaws.com/TheRareAntiquities/Like+An+Animal.MOV"
+							art_video="https://rarefnd-bucket.s3.us-east-2.amazonaws.com/TheRareAntiquities/2022-12-05+13.03.23.mp4"
 						/>
 					}
 				/>
