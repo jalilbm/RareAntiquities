@@ -16,7 +16,7 @@ import CustomRouter from "./CustomRouter";
 
 const BscChain = {
 	id: contract_data.TARGET_CHAIN,
-	name: "Binance Smart Chain",
+	name: contract_data.TARGET_CHAIN_NAME,
 	network: "Binance Smart Chain",
 	iconUrl: "https://bin.bnbstatic.com/static/images/common/favicon.ico",
 	iconBackground: "#fff",

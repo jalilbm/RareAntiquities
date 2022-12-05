@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 export const ConnectWallet = () => {
 	return (
 		<ConnectButton
-			chainStatus="none"
+			chainStatus
 			accountStatus="address"
 			showBalance={{
 				smallScreen: false,

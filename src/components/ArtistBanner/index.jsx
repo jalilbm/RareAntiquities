@@ -14,7 +14,6 @@ export default function ArtistBanner() {
 				{/* <div className="artist-image-container">
 					<img className="artist-image" src={peopleOnMuseum} />
 				</div> */}
-
 				<div className="connect-wallet-btn-container">
 					<ConnectWallet />
 				</div>
