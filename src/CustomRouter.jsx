@@ -10,6 +10,22 @@ export default function CustomRouter(props) {
 			<Routes>
 				<Route
 					exact
+					path="/"
+					element={
+						<Auction
+							stakingAddress="0xabf6607B1bd537812167fA006CA561f4F68338cC"
+							image={LikeAnAnimal}
+							head="FROM THE RARE ANTIQUITIES (LOTS 0001)"
+							title="Like An Animal (1957)"
+							artist="Pablo Picasso"
+							subscribe_art_id={1}
+							description=""
+							art_video="https://rarefnd-bucket.s3.us-east-2.amazonaws.com/TheRareAntiquities/Like+An+Animal.MOV"
+						/>
+					}
+				/>
+				<Route
+					exact
 					path="/picasso-1"
 					element={
 						<Auction
